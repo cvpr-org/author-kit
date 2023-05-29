@@ -1,1 +1,0 @@
-# cvpr24-latex-template
