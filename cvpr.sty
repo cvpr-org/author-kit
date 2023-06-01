@@ -1,35 +1,5 @@
 % ---------------------------------------------------------------
 %
-% The last version of CVPR/ICCV LaTeX template had been developed
-% by Paolo.Ienne@di.epfl.ch and awf@acm.org about 15 years ago.
-% That version suffered from several issues:
-% 1. Authors needed several individual files: cvpr.sty,
-%    cvpr_eso.sty, eso-pic.sty.
-% 2. For CVPR/ICCV rebuttals, another version of cvpr.sty was
-%    required.
-% 3. Several warnings arose due to deprecated options.
-%
-% More recently, Ming-Ming Cheng (cmm_spam@nankai.edu.cn) created
-% a single style file that helps to unify review, rebuttal, and
-% final versions with a class.
-%
-% This more recent style has been further modernized for CVPR 2022
-% by Stefan Roth (stefan.roth@NOSPAMtu-darmstadt.de).
-%
-% Acknowledgements: This file is built on the template by
-% Ming-Ming Cheng (https://github.com/MCG-NKU/CVPR_Template).
-% ---------------------------------------------------------------
-
-
-
-
-% ---------------------------------------------------------------
-%
-% $Id: cvpr.sty,v 1.3 2005/10/24 19:56:15 awf Exp $
-% by Paolo.Ienne@di.epfl.ch some mods by awf@acm.org
-%
-% ---------------------------------------------------------------
-%
 % no guarantee is given that the format corresponds perfectly to
 % IEEE 8.5" x 11" Proceedings, but most features should be ok.
 %
@@ -54,39 +24,9 @@
 %   }
 % ---------------------------------------------------------------
 
-
-
-% ---------------------------------------------------------------
-%
-%\usepackage{eso-pic}
-%
-%%
-%% This is file `eso-pic.sty',
-%% generated with the docstrip utility.
-%%
-%% The original source files were:
-%%
-%% eso-pic.dtx  (with options: `package')
-%%
-%% This is a generated file.
-%%
-%% Copyright (C) 1998-2002 by Rolf Niepraschk <niepraschk@ptb.de>
-%%
-%% This file may be distributed and/or modified under the conditions of
-%% the LaTeX Project Public License, either version 1.2 of this license
-%% or (at your option) any later version.  The latest version of this
-%% license is in:
-%%
-%%    http://www.latex-project.org/lppl.txt
-%%
-%% and version 1.2 or later is part of all distributions of LaTeX version
-%% 1999/12/01 or later.
-%%
-
-
 %
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
-\ProvidesPackage{cvpr}[2021/08/23 Example LaTex class for IEEE CVPR]
+\ProvidesPackage{cvpr}[2024 Example LaTex class for IEEE CVPR]
 
 \RequirePackage{times}    % Integrate Times for here
 \RequirePackage{cite}     % Automatically ordered citations
@@ -130,7 +70,6 @@
 
 
 % ---------------------------------------------------------------
-%\input{everyshi.sty}
 \newcommand{\@EveryShipout@Hook}{}
 \newcommand{\@EveryShipout@AtNextHook}{}
 \newcommand*{\EveryShipout}[1]
@@ -296,18 +235,8 @@
     \fi
   \fi
 }
-%\setkeys{ESO}{subgridstyle=solid,pscoord=true,gridunit=mm}
-% \def\ProcessOptionsWithKV#1{%
-%   \let\@tempc\@empty
-%   \@for\CurrentOption:=\@classoptionslist\do{%
-%     \@ifundefined{KV@#1@\CurrentOption}%
-%     {}{\edef\@tempc{\@tempc,\CurrentOption,}}}%
-%   \edef\@tempc{%
-%     \noexpand\setkeys{#1}{\@tempc\@ptionlist{\@currname.\@currext}}
-%   }%
-%   \@tempc
-%   \AtEndOfPackage{\let\@unprocessedoptions\relax}}%
-%\ProcessOptionsWithKV{ESO}%
+
+
 \newcommand\ESO@div[2]{%
   \@tempdima=#1\relax\@tempdimb=\ESO@gridunit\relax
   \@tempdimb=#2\@tempdimb\divide\@tempdima by \@tempdimb%
@@ -436,19 +365,6 @@
 \setlength{\evensidemargin}{-.304in}
 
 
-% memento from size10.clo
-% \normalsize{\@setfontsize\normalsize\@xpt\@xiipt}
-% \small{\@setfontsize\small\@ixpt{11}}
-% \footnotesize{\@setfontsize\footnotesize\@viiipt{9.5}}
-% \scriptsize{\@setfontsize\scriptsize\@viipt\@viiipt}
-% \tiny{\@setfontsize\tiny\@vpt\@vipt}
-% \large{\@setfontsize\large\@xiipt{14}}
-% \Large{\@setfontsize\Large\@xivpt{18}}
-% \LARGE{\@setfontsize\LARGE\@xviipt{22}}
-% \huge{\@setfontsize\huge\@xxpt{25}}
-% \Huge{\@setfontsize\Huge\@xxvpt{30}}
-
-
 % Suppress page numbers when the appropriate option is given
 \iftoggle{cvprpagenumbers}{}{%
   \pagestyle{empty}
@@ -485,8 +401,7 @@
   }
 }
 
-\def\@maketitle
-   {
+\def\@maketitle{
    \newpage
    \null
    \iftoggle{cvprrebuttal}{\vspace*{-.3in}}{\vskip .375in}
@@ -494,32 +409,30 @@
       % smaller title font only for rebuttal
       \iftoggle{cvprrebuttal}{{\large \bf \@title \par}}{{\Large \bf \@title \par}}
       % additional two empty lines at the end of the title
-      \iftoggle{cvprrebuttal}{\vspace*{-22pt}}{\vspace*{24pt}}
-      {
-      \large
-      \lineskip .5em
-      \begin{tabular}[t]{c}
-        \iftoggle{cvprfinal}{
-          \@author
-        }{
-          \iftoggle{cvprrebuttal}{}{
-            Anonymous \confName~submission\\
-            \vspace*{1pt}\\
-            Paper ID \cvprPaperID
+      \iftoggle{cvprrebuttal}{\vspace*{-22pt}}{\vspace*{24pt}}{
+        \large
+        \lineskip .5em
+        \begin{tabular}[t]{c}
+          \iftoggle{cvprfinal}{
+            \@author
+          }{
+            \iftoggle{cvprrebuttal}{}{
+              Anonymous \confName~submission\\
+              \vspace*{1pt}\\
+              Paper ID \cvprPaperID
+            }
           }
-        }
-      \end{tabular}
-      \par
+        \end{tabular}
+        \par
       }
       % additional small space at the end of the author name
       \vskip .5em
       % additional empty line at the end of the title block
       \vspace*{12pt}
    \end{center}
-   }
+}
 
-\def\abstract
-   {%
+\def\abstract{%
    % Suppress page numbers when the appropriate option is given
    \iftoggle{cvprpagenumbers}{}{%
      \thispagestyle{empty}
@@ -527,7 +440,7 @@
    \centerline{\large\bf Abstract}%
    \vspace*{12pt}%
    \it%
-   }
+}
 
 \def\endabstract
    {
@@ -575,13 +488,12 @@
 % ----- end of vruler
 
 %% Define linenumber setup
-\usepackage[switch,mathlines]{lineno}
+\RequirePackage[switch,mathlines]{lineno}
 
 % Line numbers in CVPR blue using font from \cvprtenhv
 \renewcommand\linenumberfont{\cvprtenhv\color[rgb]{.5,.5,1}}
 
 \renewcommand\thelinenumber{\fillzeros[3]{\arabic{linenumber}}}
-
 
 \setlength{\linenumbersep}{.75cm}
 
@@ -590,7 +502,7 @@
 % Patch amsmath commands so that the previous line and the equation itself
 % are numbered. Bug: multline has an extra line number.
 % https://tex.stackexchange.com/questions/461186/how-to-use-lineno-with-amsmath-align
-\usepackage{etoolbox} %% <- for \pretocmd, \apptocmd and \patchcmd
+\RequirePackage{etoolbox} %% <- for \pretocmd, \apptocmd and \patchcmd
 
 \newcommand*\linenomathpatch[1]{%
   \expandafter\pretocmd\csname #1\endcsname {\linenomath}{}{}%
@@ -614,8 +526,7 @@
 \let\linenomathAMS\linenomathNonumbers
 \fi
 
-\iftoggle{cvprfinal}{
-}{
+\iftoggle{cvprfinal}{}{
 % Add the numbers
 \linenumbers
 \AtBeginDocument{%
@@ -634,7 +545,7 @@
   \iftoggle{cvprfinal}{
   }{
     \color[rgb]{.5,.5,1}
-    
+
     \def\pid{\parbox{1in}{\begin{center}\bf\sf{\small \confName}\\\#\cvprPaperID\end{center}}}
     \AtTextUpperLeft{%paperID in corners
       \put(\LenToUnit{-65pt},\LenToUnit{45pt}){\pid}
