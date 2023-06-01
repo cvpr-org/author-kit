@@ -13,9 +13,10 @@
 % a single style file that helps to unify review, rebuttal, and
 % final versions with a class.
 %
-% This more recent style has been further modernized for CVPR 2022
-% by Stefan Roth (stefan.roth@NOSPAMtu-darmstadt.de).
-%
+% The style has been modernized:
+% - for CVPR 2022 by Stefan Roth (stefan.roth@NOSPAMtu-darmstadt.de)
+% - for 3DV 2024 and CVPR 2024 by Andrea Tagliasacchi (SFU)
+% 
 % Acknowledgements: This file is built on the template by
 % Ming-Ming Cheng (https://github.com/MCG-NKU/CVPR_Template).
 % ---------------------------------------------------------------
@@ -84,13 +85,18 @@
 %%
 
 
-%
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesPackage{cvpr}[2021/08/23 Example LaTex class for IEEE CVPR]
 
 \RequirePackage{times}    % Integrate Times for here
 \RequirePackage{cite}     % Automatically ordered citations
 \RequirePackage{xspace}
+\RequirePackage{graphicx}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{booktabs}
+\RequirePackage[numbers,sort&compress]{natbib}
+\setlength{\bibsep}{1pt plus 1pt minus 1pt}
 
 \RequirePackage{silence}  % Suppress unwanted warnings
 \hbadness=10000 \vbadness=10000 \vfuzz=30pt \hfuzz=30pt
@@ -116,6 +122,13 @@
 \DeclareOption{rebuttal}{\togglefalse{cvprfinal}\toggletrue{cvprrebuttal}}
 \DeclareOption{pagenumbers}{\toggletrue{cvprpagenumbers}}
 \DeclareOption*{\PackageWarning{cvpr}{Unkown option `\CurrentOption'}}
+
+
+% TODO
+\newtoggle{foo}
+\togglefalse{foo}
+\DeclareOption{foo}{\toggletrue{foo}}
+
 
 \ProcessOptions\relax
 
@@ -525,8 +538,8 @@
      \thispagestyle{empty}
    }
    \centerline{\large\bf Abstract}%
-   \vspace*{12pt}%
-   \it%
+   \vspace*{12pt}\noindent%
+   \it\ignorespaces%
    }
 
 \def\endabstract
@@ -539,13 +552,13 @@
 
 % correct heading spacing and type
 \def\cvprsection{\@startsection {section}{1}{\z@}
-   {10pt plus 2pt minus 2pt}{7pt} {\large\bf}}
+   {-10pt plus -2pt minus -2pt}{7pt} {\large\bf}}
 \def\cvprssect#1{\cvprsection*{#1}}
 \def\cvprsect#1{\cvprsection{\hskip -1em.~#1}}
 \def\section{\@ifstar\cvprssect\cvprsect}
 
 \def\cvprsubsection{\@startsection {subsection}{2}{\z@}
-   {8pt plus 2pt minus 2pt}{6pt} {\elvbf}}
+   {-8pt plus -2pt minus -2pt}{6pt} {\elvbf}}
 \def\cvprssubsect#1{\cvprsubsection*{#1}}
 \def\cvprsubsect#1{\cvprsubsection{\hskip -1em.~#1}}
 \def\subsection{\@ifstar\cvprssubsect\cvprsubsect}
@@ -588,7 +601,7 @@
 % Bug: An equation with $$ ... $$ isn't numbered, nor is the previous line.
 
 % Patch amsmath commands so that the previous line and the equation itself
-% are numbered. Bug: multline has an extra line number.
+% are numbered. Bug: multiline has an extra line number.
 % https://tex.stackexchange.com/questions/461186/how-to-use-lineno-with-amsmath-align
 \usepackage{etoolbox} %% <- for \pretocmd, \apptocmd and \patchcmd
 
@@ -677,3 +690,59 @@
 \makeatother
 
 % ---------------------------------------------------------------
+
+%% redefine the \title command so that a variable name is saved in \thetitle, and provides the \maketitlesupplementary command 
+\let\titleold\title
+\renewcommand{\title}[1]{\titleold{#1}\newcommand{\thetitle}{#1}}
+\def\maketitlesupplementary
+   {
+   \newpage
+       \twocolumn[
+        \centering
+        \Large
+        \textbf{\thetitle}\\
+        \vspace{0.5em}Supplementary Material \\
+        \vspace{1.0em}
+       ] %< twocolumn
+   }
+
+% ---------------------------------------------------------------
+
+%% Support for easy cross-referencing (e.g. \cref{sec:intro}
+% configured with \AtEndPreamble as it needs to be called after hyperref
+\AtEndPreamble{
+    \usepackage[capitalize]{cleveref}
+    \crefname{section}{Sec.}{Secs.}
+    \Crefname{section}{Section}{Sections}
+    \Crefname{table}{Table}{Tables}
+    \crefname{table}{Tab.}{Tabs.}
+}
+
+% ---------------------------------------------------------------
+
+%% More compact compact itemize/enumeration (e.g. list contributions)
+\RequirePackage{enumitem}
+\setlist[itemize]{noitemsep,leftmargin=*,topsep=0em}
+\setlist[enumerate]{noitemsep,leftmargin=*,topsep=0em}
+
+% ---------------------------------------------------------------
+
+% TODO
+\newcommand{\defeditorcomment}[2]{%
+  \iftoggle{foo}{%
+    \expandafter\def\csname#1\endcsname##1{{\color{#2}[#1: ##1]}}%
+  }{%
+    \expandafter\def\csname#1\endcsname##1{{}}%
+  }%
+}
+\newcommand{\defeditorinline}[2]{%
+  \iftoggle{foo}{%
+    \expandafter\def\csname#1\endcsname##1{{\color{#2}##1}}%
+  }{%
+    \expandafter\def\csname#1\endcsname##1{{##1}}%
+  }%
+}
+\newcommand{\defeditor}[2]{%
+    \defeditorcomment{#1}{#2}%
+    \defeditorinline{\MakeLowercase{#1}}{#2}%
+}
