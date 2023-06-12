@@ -1,6 +1,6 @@
 % ---------------------------------------------------------------
 %
-% no guarantee is given that the format corresponds perfectly to
+% No guarantee is given that the format corresponds perfectly to
 % IEEE 8.5" x 11" Proceedings, but most features should be ok.
 %
 % ---------------------------------------------------------------
@@ -24,13 +24,18 @@
 %   }
 % ---------------------------------------------------------------
 
-%
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesPackage{cvpr}[2024 Example LaTex class for IEEE CVPR]
 
 \RequirePackage{times}    % Integrate Times for here
 \RequirePackage{cite}     % Automatically ordered citations
 \RequirePackage{xspace}
+\RequirePackage{graphicx}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{booktabs}
+\RequirePackage[numbers,sort&compress]{natbib}
+\setlength{\bibsep}{1pt plus 1pt minus 1pt}
 
 \RequirePackage{silence}  % Suppress unwanted warnings
 \hbadness=10000 \vbadness=10000 \vfuzz=30pt \hfuzz=30pt
@@ -56,7 +61,6 @@
 \DeclareOption{rebuttal}{\togglefalse{cvprfinal}\toggletrue{cvprrebuttal}}
 \DeclareOption{pagenumbers}{\toggletrue{cvprpagenumbers}}
 \DeclareOption*{\PackageWarning{cvpr}{Unkown option `\CurrentOption'}}
-
 \ProcessOptions\relax
 
 % Don't warn about missing author for rebuttal
@@ -442,8 +446,7 @@
    \it%
 }
 
-\def\endabstract
-   {
+\def\endabstract{%
    % additional empty line at the end of the abstract
    \vspace*{12pt}
    }
@@ -452,13 +455,13 @@
 
 % correct heading spacing and type
 \def\cvprsection{\@startsection {section}{1}{\z@}
-   {10pt plus 2pt minus 2pt}{7pt} {\large\bf}}
+   {-10pt plus -2pt minus -2pt}{7pt} {\large\bf}}
 \def\cvprssect#1{\cvprsection*{#1}}
 \def\cvprsect#1{\cvprsection{\hskip -1em.~#1}}
 \def\section{\@ifstar\cvprssect\cvprsect}
 
 \def\cvprsubsection{\@startsection {subsection}{2}{\z@}
-   {8pt plus 2pt minus 2pt}{6pt} {\elvbf}}
+   {-8pt plus -2pt minus -2pt}{6pt} {\elvbf}}
 \def\cvprssubsect#1{\cvprsubsection*{#1}}
 \def\cvprsubsect#1{\cvprsubsection{\hskip -1em.~#1}}
 \def\subsection{\@ifstar\cvprssubsect\cvprsubsect}
@@ -500,7 +503,7 @@
 % Bug: An equation with $$ ... $$ isn't numbered, nor is the previous line.
 
 % Patch amsmath commands so that the previous line and the equation itself
-% are numbered. Bug: multline has an extra line number.
+% are numbered. Bug: multiline has an extra line number.
 % https://tex.stackexchange.com/questions/461186/how-to-use-lineno-with-amsmath-align
 \RequirePackage{etoolbox} %% <- for \pretocmd, \apptocmd and \patchcmd
 
@@ -588,3 +591,37 @@
 \makeatother
 
 % ---------------------------------------------------------------
+
+%% redefine the \title command so that a variable name is saved in \thetitle, and provides the \maketitlesupplementary command 
+\let\titleold\title
+\renewcommand{\title}[1]{\titleold{#1}\newcommand{\thetitle}{#1}}
+\def\maketitlesupplementary
+   {
+   \newpage
+       \twocolumn[
+        \centering
+        \Large
+        \textbf{\thetitle}\\
+        \vspace{0.5em}Supplementary Material \\
+        \vspace{1.0em}
+       ] %< twocolumn
+   }
+
+% ---------------------------------------------------------------
+
+%% Support for easy cross-referencing (e.g. \cref{sec:intro}
+% configured with \AtEndPreamble as it needs to be called after hyperref
+\AtEndPreamble{
+    \usepackage[capitalize]{cleveref}
+    \crefname{section}{Sec.}{Secs.}
+    \Crefname{section}{Section}{Sections}
+    \Crefname{table}{Table}{Tables}
+    \crefname{table}{Tab.}{Tabs.}
+}
+
+% ---------------------------------------------------------------
+
+%% More compact compact itemize/enumeration (e.g. list contributions)
+\RequirePackage{enumitem}
+\setlist[itemize]{noitemsep,leftmargin=*,topsep=0em}
+\setlist[enumerate]{noitemsep,leftmargin=*,topsep=0em}
