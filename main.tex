@@ -10,15 +10,16 @@
 \usepackage[review]{cvpr}      % To produce the REVIEW version
 % \usepackage[pagenumbers]{cvpr} % To force page numbers, e.g. for an arXiv version
 
+% Import additional packages in the preamble file, before hyperref
+\input{preamble}
+
 % It is strongly recommended to use hyperref, especially for the review version.
 % hyperref with option pagebackref eases the reviewers' job.
 % Please disable hyperref *only* if you encounter grave issues, 
 % e.g. with the file validation for the camera-ready version.
 %
-% If you comment hyperref and then uncomment it, you should delete
-% ReviewTempalte.aux before re-running LaTeX.
-% (Or just hit 'q' on the first LaTeX run, let it finish, and you
-%  should be clear).
+% If you comment hyperref and then uncomment it, you should delete *.aux before re-running LaTeX.
+% (Or just hit 'q' on the first LaTeX run, let it finish, and you should be clear).
 \usepackage[pagebackref,breaklinks,colorlinks]{hyperref}
 
 %%%%%%%%% PAPER ID  - PLEASE UPDATE
@@ -46,21 +47,8 @@ First line of institution2 address\\
 {\tt\small secondauthor@i2.org}
 }
 
-% TODO 
-% https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX#Accessing_additional_named_colours
-\RequirePackage[dvipsnames]{xcolor}
-\newcommand{\red}[1]{{\color{red}#1}}
-\newcommand{\todo}[1]{{\color{red}#1}}
-\newcommand{\TODO}[1]{\textbf{\color{red}[TODO: #1]}}
-
-%% CR: The following line fails in my standalone LaTex with the error
-%%     ! Missing \endcsname inserted.
-%%     I tried fixing it for half an hour but couldn't.
-% \defeditor{AT}{blue}
-
 \begin{document}
 \maketitle
-
 \input{sec/0_abstract}    
 \input{sec/1_intro}
 \input{sec/2_formatting}
@@ -71,9 +59,5 @@ First line of institution2 address\\
     \bibliography{main}
 }
 \input{sec/X_suppl}
-
-% TODO
-% \AT{While this is my comment}
-% \at{This is a sentence edited by me.}
 
 \end{document}

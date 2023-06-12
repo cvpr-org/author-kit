@@ -5,4 +5,8 @@
 *.brf
 *.log
 *.out
+*.fls
 *.synctex.gz
+*.fdb_latexmk
+*.pdf
+.gitignore
