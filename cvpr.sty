@@ -423,7 +423,7 @@
             \iftoggle{cvprrebuttal}{}{
               Anonymous \confName~submission\\
               \vspace*{1pt}\\
-              Paper ID \cvprPaperID
+              Paper ID \paperID
             }
           }
         \end{tabular}
@@ -549,14 +549,14 @@
   }{
     \color[rgb]{.5,.5,1}
 
-    \def\pid{\parbox{1in}{\begin{center}\bf\sf{\small \confName}\\\#\cvprPaperID\end{center}}}
+    \def\pid{\parbox{1in}{\begin{center}\bf\sf{\small \confName}\\\#\paperID\end{center}}}
     \AtTextUpperLeft{%paperID in corners
       \put(\LenToUnit{-65pt},\LenToUnit{45pt}){\pid}
       \put(\LenToUnit{\textwidth\kern-8pt},\LenToUnit{45pt}){\pid}
     }
     \AtTextUpperLeft{%confidential
       \put(0,\LenToUnit{1cm}){\parbox{\textwidth}{\centering\cvprtenhv
-      \confName~\confYear~Submission \#\cvprPaperID. CONFIDENTIAL REVIEW COPY.  DO NOT DISTRIBUTE.}}
+      \confName~\confYear~Submission \#\paperID. CONFIDENTIAL REVIEW COPY.  DO NOT DISTRIBUTE.}}
     }
   }
 }
