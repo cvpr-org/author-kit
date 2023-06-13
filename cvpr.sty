@@ -122,14 +122,6 @@
 \DeclareOption{rebuttal}{\togglefalse{cvprfinal}\toggletrue{cvprrebuttal}}
 \DeclareOption{pagenumbers}{\toggletrue{cvprpagenumbers}}
 \DeclareOption*{\PackageWarning{cvpr}{Unkown option `\CurrentOption'}}
-
-
-% TODO
-\newtoggle{foo}
-\togglefalse{foo}
-\DeclareOption{foo}{\toggletrue{foo}}
-
-
 \ProcessOptions\relax
 
 % Don't warn about missing author for rebuttal
@@ -724,25 +716,3 @@
 \RequirePackage{enumitem}
 \setlist[itemize]{noitemsep,leftmargin=*,topsep=0em}
 \setlist[enumerate]{noitemsep,leftmargin=*,topsep=0em}
-
-% ---------------------------------------------------------------
-
-% TODO
-\newcommand{\defeditorcomment}[2]{%
-  \iftoggle{foo}{%
-    \expandafter\def\csname#1\endcsname##1{{\color{#2}[#1: ##1]}}%
-  }{%
-    \expandafter\def\csname#1\endcsname##1{{}}%
-  }%
-}
-\newcommand{\defeditorinline}[2]{%
-  \iftoggle{foo}{%
-    \expandafter\def\csname#1\endcsname##1{{\color{#2}##1}}%
-  }{%
-    \expandafter\def\csname#1\endcsname##1{{##1}}%
-  }%
-}
-\newcommand{\defeditor}[2]{%
-    \defeditorcomment{#1}{#2}%
-    \defeditorinline{\MakeLowercase{#1}}{#2}%
-}
