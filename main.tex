@@ -19,6 +19,16 @@
 % (Or just hit 'q' on the first LaTeX run, let it finish, and you should be clear).
 \usepackage[pagebackref,breaklinks,colorlinks]{hyperref}
 
+% Change citation and link colors from bright-green to CVPR blue (#357ebd).
+\definecolor{cvprblue}{rgb}{0.21,0.49,0.74}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=cvprblue,
+    citecolor=cvprblue,
+    filecolor=cvprblue,
+    urlcolor=cvprblue
+}
+
 %%%%%%%%% PAPER ID  - PLEASE UPDATE
 \def\paperID{*****} % *** Enter the CVPR Paper ID here
 \def\confName{CVPR}
