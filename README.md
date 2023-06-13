@@ -1,4 +1,4 @@
-# CVPR/ICCV/3DV Official LaTeX template 
+# 3DV Official LaTeX template (branch of CVPR 2024)
 
 History (in reverse chronological order)
 
