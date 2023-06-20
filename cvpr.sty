@@ -40,6 +40,7 @@
 \WarningFilter{hyperref}{Token not allowed in a PDF string}
 \WarningFilter[rebuttal]{latex}{No \author given}
 \RequirePackage{etoolbox}%% <- for \pretocmd, \apptocmd and \patchcmd
+\RequirePackage{xpatch}% for patching biblatex
 
 % Use modern caption package to allow for sub-figures etc.
 % Reproduces the original CVPR/ICCV style as closely as possible.
@@ -64,13 +65,17 @@ giveninits=true, % abbreviate the authors names, i.e., put only the initials
 
 % Remove strings from the pageref
 \DefineBibliographyStrings{english}{%
-  backrefpage =,% originally "cited on page"
-  backrefpages =,% originally "cited on pages"
+  backrefpage ={},% originally "cited on page"
+  backrefpages ={},% originally "cited on pages"
 }
 
-% Remove spurious white space from pageref when using no string
-\patchcmd{\abx@macro@pageref}{\ppspace}{}{}{\PackageWarningNoLine{cvpr}{Error patching pageref bibmacro.  Let the maintainers know that the patch is not working.}}
+% Removes the parenthesis from the backref
+%\DeclareFieldFormat{nobackrefparens}{#1}
+%\xpatchbibmacro{pageref}{parens}{nobackrefparens}{}{\PackageWarningNoLine{cvpr}{Error patching pageref bibmacro.  Let the maintainers know that the patch is not working.}}
 
+% Remove spurious white space from pageref when using no string
+\xpatchbibmacro{pageref}{\ppspace}{}{}{\PackageWarningNoLine{cvpr}{Error patching pageref bibmacro.  Let the maintainers know that the patch is not working.}}
+\xpatchbibmacro{pageref}{\ppspace}{}{}{\PackageWarningNoLine{cvpr}{Error patching pageref bibmacro.  Let the maintainers know that the patch is not working.}}
 
 % Sorts by appearance globally and by year within the citation
 % https://tex.stackexchange.com/a/55451/7561
@@ -83,6 +88,12 @@ giveninits=true, % abbreviate the authors names, i.e., put only the initials
 % Change the normal space to a non-breaking one between the names and the reference
 % https://tex.stackexchange.com/a/74932/7561
 \renewcommand\namelabeldelim{\addnbspace}
+
+% Make the fontsize small
+\renewcommand*{\bibfont}{\normalfont\small}
+
+% Remove quotes from titles
+\DeclareFieldFormat*{title}{#1}
 
 
 \newtoggle{cvprfinal}        % Camera-ready version
@@ -427,13 +438,14 @@ giveninits=true, % abbreviate the authors names, i.e., put only the initials
       \PackageWarningNoLine{cvpr}{Package `hyperref' is not loaded, but highly recommended for camera-ready version}
     }
   }{%
-    \@ifpackageloaded{biblatex}{
-      \@ifpackagewith{biblatex}{backref}{}{
-        \PackageWarningNoLine{cvpr}{Package `biblatex' is not loaded with option `backref', which is strongly recommended for review version}
-      }
-    }{%
-      \PackageWarningNoLine{cvpr}{Package `biblatex' is not loaded, but strongly recommended for review version}
-    }
+    %todo biblatex options are not recognized since it is not "loaded" now.  Probably, we need to add some check up code as suggested here https://tex.stackexchange.com/a/287673/7561
+%    \@ifpackageloaded{biblatex}{
+%      \@ifpackagewith{biblatex}{backref}{}{
+%        \PackageWarningNoLine{cvpr}{Package `biblatex' is not loaded with option `backref', which is strongly recommended for review version}
+%      }
+%    }{%
+%      \PackageWarningNoLine{cvpr}{Package `biblatex' is not loaded, but strongly recommended for review version}
+%    }
   }
 }
 
