@@ -1,3 +1,4 @@
+% !BIB program=biber
 % CVPR 2024 Paper Template; see https://github.com/cvpr-org/author-kit
 
 \documentclass[10pt,twocolumn,letterpaper]{article}
@@ -12,12 +13,15 @@
 
 % It is strongly recommended to use hyperref, especially for the review version.
 % hyperref with option pagebackref eases the reviewers' job.
-% Please disable hyperref *only* if you encounter grave issues, 
+% Please disable hyperref *only* if you encounter grave issues,
 % e.g. with the file validation for the camera-ready version.
 %
 % If you comment hyperref and then uncomment it, you should delete *.aux before re-running LaTeX.
 % (Or just hit 'q' on the first LaTeX run, let it finish, and you should be clear).
-\usepackage[pagebackref,breaklinks,colorlinks]{hyperref}
+\usepackage[breaklinks,colorlinks]{hyperref}
+
+% Add your own bibliography
+\addbibresource{main.bib}
 
 %%%%%%%%% PAPER ID  - PLEASE UPDATE
 \def\paperID{*****} % *** Enter the Paper ID here
@@ -46,15 +50,13 @@ First line of institution2 address\\
 
 \begin{document}
 \maketitle
-\input{sec/0_abstract}    
+\input{sec/0_abstract}
 \input{sec/1_intro}
 \input{sec/2_formatting}
 \input{sec/3_finalcopy}
-{
-    \small
-    \bibliographystyle{ieeenat_fullname}
-    \bibliography{main}
-}
+
+\printbibliography
+
 \input{sec/X_suppl}
 
 \end{document}
