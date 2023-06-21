@@ -69,6 +69,8 @@ giveninits=true, % abbreviate the authors names, i.e., put only the initials
   backrefpages ={},% originally "cited on pages"
 }
 
+%% Adapting the default style to CVPR's quirks
+
 % Removes the parenthesis from the backref
 %\DeclareFieldFormat{nobackrefparens}{#1}
 %\xpatchbibmacro{pageref}{parens}{nobackrefparens}{}{\PackageWarningNoLine{cvpr}{Error patching pageref bibmacro.  Let the maintainers know that the patch is not working.}}
@@ -76,6 +78,28 @@ giveninits=true, % abbreviate the authors names, i.e., put only the initials
 % Remove spurious white space from pageref when using no string
 \xpatchbibmacro{pageref}{\ppspace}{}{}{\PackageWarningNoLine{cvpr}{Error patching pageref bibmacro.  Let the maintainers know that the patch is not working.}}
 \xpatchbibmacro{pageref}{\ppspace}{}{}{\PackageWarningNoLine{cvpr}{Error patching pageref bibmacro.  Let the maintainers know that the patch is not working.}}
+
+% Revert unit divider to period
+\renewcommand*\newunitpunct{\addperiod\addspace}
+
+% Change format of volume-number-editor
+\DeclareFieldFormat*{volume}{#1}
+
+\renewbibmacro*{volume+number+eid}{%
+  \printfield{volume}%
+  \printfield[parens]{number}%
+  \setunit{\addcolon\addspace}%
+  \printfield{eid}%
+}
+
+% Change pages separator to colon on article
+\renewcommand{\bibpagespunct}{\ifentrytype{article}{\addcolon\addspace}{\addcomma\addspace}}
+\DeclareFieldFormat[article,incollection]{pages}{#1}
+
+% Remove quotes from titles
+\DeclareFieldFormat*{title}{#1}
+
+
 
 % Sorts by appearance globally and by year within the citation
 % https://tex.stackexchange.com/a/55451/7561
@@ -92,8 +116,6 @@ giveninits=true, % abbreviate the authors names, i.e., put only the initials
 % Make the fontsize small
 \renewcommand*{\bibfont}{\normalfont\small}
 
-% Remove quotes from titles
-\DeclareFieldFormat*{title}{#1}
 
 
 \newtoggle{cvprfinal}        % Camera-ready version
