@@ -2,6 +2,7 @@
 
 History (in reverse chronological order)
 
+- References in `cvprblue` for CVPR 2024 by [Klaus Greff](https://github.com/Qwlouse) 
 - added natbib for CVPR 2024 by [Christian Richardt](https://richardt.name/)
 - replaced buggy (review-mode) line numbering for 3DV 2024 by [Adin Ramirez Rivera](https://openreview.net/profile?id=~Ad%C3%ADn_Ram%C3%ADrez_Rivera1)
 - logic for inline supplementary for 3DV 2024 by [Andrea Tagliasacchi](https://taiya.github.io) 
