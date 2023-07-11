@@ -7,11 +7,14 @@
 \usepackage{amssymb}
 \usepackage{booktabs}
 
+% Import additional packages in the preamble file, before hyperref
+\input{preamble}
 
 % If you comment hyperref and then uncomment it, you should delete
 % egpaper.aux before re-running latex.  (Or just hit 'q' on the first latex
 % run, let it finish, and you should be clear).
-\usepackage[pagebackref,breaklinks,colorlinks,bookmarks=false]{hyperref}
+\definecolor{cvprblue}{rgb}{0.21,0.49,0.74}
+\usepackage[pagebackref,breaklinks,colorlinks,citecolor=cvprblue]{hyperref}
 
 % Support for easy cross-referencing
 \usepackage[capitalize]{cleveref}
@@ -138,8 +141,8 @@ When placing figures in \LaTeX, it is almost always best to use \verb+\includegr
 %%%%%%%%% REFERENCES
 {
     \small
-    \bibliographystyle{ieee_fullname}
-    \bibliography{egbib}
+    \bibliographystyle{ieeenat_fullname}
+    \bibliography{main}
 }
 
 \end{document}
