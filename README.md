@@ -1,5 +1,7 @@
 # CVPR/ICCV/3DV Official LaTeX template 
 
+**Note:** the microsoft word version of the template is in branch `main-msword`
+
 History (in reverse chronological order)
 
 - References in `cvprblue` for CVPR 2024 by [Klaus Greff](https://github.com/Qwlouse) 
