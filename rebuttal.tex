@@ -24,15 +24,11 @@
 %\setcounter{equation}{2}
 
 % If you wish to avoid re-using reference numbers from the main paper,
-% please uncomment the following and change the counter for `enumiv' to
-% the number of references you have in the main paper (here, 6).
-%\let\oldthebibliography=\thebibliography
-%\let\oldendthebibliography=\endthebibliography
-%\renewenvironment{thebibliography}[1]{%
-%     \oldthebibliography{#1}%
-%     \setcounter{enumiv}{6}%
-%}{\oldendthebibliography}
-
+% please uncomment the following and change the counter value to the
+% number of references you have in the main paper (here, 100).
+%\makeatletter
+%\apptocmd{\thebibliography}{\global\c@NAT@ctr 100\relax}{}{}
+%\makeatother
 
 %%%%%%%%% PAPER ID  - PLEASE UPDATE
 \def\paperID{*****} % *** Enter the Paper ID here
