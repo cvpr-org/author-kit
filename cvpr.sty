@@ -74,6 +74,7 @@
 
 
 % ---------------------------------------------------------------
+% Inlined version of the obsolete "everyshi-2001-05-15" package.
 \newcommand{\@EveryShipout@Hook}{}
 \newcommand{\@EveryShipout@AtNextHook}{}
 \newcommand*{\EveryShipout}[1]
@@ -104,13 +105,12 @@
    \let\shipout\@EveryShipout@Shipout
    }
 \AtBeginDocument{\@EveryShipout@Init}
-
 % ---------------------------------------------------------------
 
 
-
+% ---------------------------------------------------------------
+% Inlined simplified version of the "eso-pic" package.
 \newcommand\LenToUnit[1]{#1\@gobble}
-
 \newcommand\AtPageUpperLeft[1]{%
   \begingroup
     \@tempdima=0pt\relax\@tempdimb=\ESO@yoffsetI\relax
@@ -180,71 +180,9 @@
 }
 \EveryShipout{\@ShipoutPicture}
 \RequirePackage{keyval}
-\newif\ifESO@dvips\ESO@dvipsfalse \newif\ifESO@grid\ESO@gridfalse
+\newif\ifESO@dvips\ESO@dvipsfalse
 \newif\ifESO@texcoord\ESO@texcoordfalse
-\newcommand*\ESO@gridunitname{}
-\newcommand*\ESO@gridunit{}
-\newcommand*\ESO@labelfactor{}
-\newcommand*\ESO@griddelta{}\newcommand*\ESO@griddeltaY{}
-\newcommand*\ESO@gridDelta{}\newcommand*\ESO@gridDeltaY{}
-\newcommand*\ESO@gridcolor{}
-\newcommand*\ESO@subgridcolor{}
-\newcommand*\ESO@subgridstyle{dotted}% ???
-\newcommand*\ESO@gap{}
-\newcommand*\ESO@yoffsetI{}\newcommand*\ESO@yoffsetII{}
-\newcommand*\ESO@gridlines{\thinlines}
-\newcommand*\ESO@subgridlines{\thinlines}
-\newcommand*\ESO@hline[1]{\ESO@subgridlines\line(1,0){#1}}
-\newcommand*\ESO@vline[1]{\ESO@subgridlines\line(0,1){#1}}
-\newcommand*\ESO@Hline[1]{\ESO@gridlines\line(1,0){#1}}
-\newcommand*\ESO@Vline[1]{\ESO@gridlines\line(0,1){#1}}
-\newcommand\ESO@fcolorbox[4][]{\fbox{#4}}
-\newcommand\ESO@color[1]{}
-\newcommand\ESO@colorbox[3][]{%
-  \begingroup
-    \fboxrule=0pt\fbox{#3}%
-  \endgroup
-}
-\newcommand\gridSetup[6][]{%
-  \edef\ESO@gridunitname{#1}\edef\ESO@gridunit{#2}
-  \edef\ESO@labelfactor{#3}\edef\ESO@griddelta{#4}
-  \edef\ESO@gridDelta{#5}\edef\ESO@gap{#6}}
-\define@key{ESO}{texcoord}[true]{\csname ESO@texcoord#1\endcsname}
-\define@key{ESO}{pscoord}[true]{\csname @tempswa#1\endcsname
-  \if@tempswa\ESO@texcoordfalse\else\ESO@texcoordtrue\fi}
-\define@key{ESO}{dvips}[true]{\csname ESO@dvips#1\endcsname}
-\define@key{ESO}{grid}[true]{\csname ESO@grid#1\endcsname
-  \setkeys{ESO}{gridcolor=black,subgridcolor=black}}
-\define@key{ESO}{colorgrid}[true]{\csname ESO@grid#1\endcsname
-  \setkeys{ESO}{gridcolor=red,subgridcolor=green}}
-\define@key{ESO}{gridcolor}{\def\ESO@gridcolor{#1}}
-\define@key{ESO}{subgridcolor}{\def\ESO@subgridcolor{#1}}
-\define@key{ESO}{subgridstyle}{\def\ESO@subgridstyle{#1}}%
-\define@key{ESO}{gridunit}{%
-  \def\@tempa{#1}
-  \def\@tempb{bp}
-  \ifx\@tempa\@tempb
-    \gridSetup[\@tempa]{1bp}{1}{10}{50}{2}
-  \else
-    \def\@tempb{pt}
-    \ifx\@tempa\@tempb
-      \gridSetup[\@tempa]{1pt}{1}{10}{50}{2}
-    \else
-      \def\@tempb{in}
-      \ifx\@tempa\@tempb
-        \gridSetup[\@tempa]{.1in}{.1}{2}{10}{.5}
-      \else
-        \gridSetup[mm]{1mm}{1}{5}{20}{1}
-      \fi
-    \fi
-  \fi
-}
 
-
-\newcommand\ESO@div[2]{%
-  \@tempdima=#1\relax\@tempdimb=\ESO@gridunit\relax
-  \@tempdimb=#2\@tempdimb\divide\@tempdima by \@tempdimb%
-  \@tempcnta\@tempdima\advance\@tempcnta\@ne}
 \AtBeginDocument{%
   \IfFileExists{color.sty}
   {%
@@ -266,81 +204,13 @@
       \fi
     \fi
   \fi
-  \ifESO@dvips\def\@tempb{eepic}\else\def\@tempb{epic}\fi
-  \def\@tempa{dotted}%\def\ESO@gap{\LenToUnit{6\@wholewidth}}%
-  \ifx\@tempa\ESO@subgridstyle
-    \IfFileExists{\@tempb.sty}%
-    {%
-      \RequirePackage{\@tempb}
-      \renewcommand*\ESO@hline[1]{\ESO@subgridlines\dottedline{\ESO@gap}%
-        (0,0)(##1,0)}
-      \renewcommand*\ESO@vline[1]{\ESO@subgridlines\dottedline{\ESO@gap}%
-        (0,0)(0,##1)}
-    }{}
-  \else
-    \ifx\ESO@gridcolor\ESO@subgridcolor%
-      \renewcommand*\ESO@gridlines{\thicklines}
-    \fi
-  \fi
 }
 \ifESO@texcoord
   \def\ESO@yoffsetI{0pt}\def\ESO@yoffsetII{-\paperheight}
-  \edef\ESO@griddeltaY{-\ESO@griddelta}\edef\ESO@gridDeltaY{-\ESO@gridDelta}
 \else
   \def\ESO@yoffsetI{\paperheight}\def\ESO@yoffsetII{0pt}
-  \edef\ESO@griddeltaY{\ESO@griddelta}\edef\ESO@gridDeltaY{\ESO@gridDelta}
 \fi
-\newcommand\ESO@gridpicture{%
-  \begingroup
-    \setlength\unitlength{\ESO@gridunit}%
-    \ESO@color{\ESO@subgridcolor}%
-    \ESO@div{\paperheight}{\ESO@griddelta}%
-    \multiput(0,0)(0,\ESO@griddeltaY){\@tempcnta}%
-      {\ESO@hline{\LenToUnit{\paperwidth}}}%
-    \ESO@div{\paperwidth}{\ESO@griddelta}%
-    \multiput(0,\LenToUnit{\ESO@yoffsetII})(\ESO@griddelta,0){\@tempcnta}%
-      {\ESO@vline{\LenToUnit{\paperheight}}}%
-    \ESO@color{\ESO@gridcolor}%
-    \ESO@div{\paperheight}{\ESO@gridDelta}%
-    \multiput(0,0)(0,\ESO@gridDeltaY){\@tempcnta}%
-      {\ESO@Hline{\LenToUnit{\paperwidth}}}%
-    \ESO@div{\paperwidth}{\ESO@gridDelta}%
-    \multiput(0,\LenToUnit{\ESO@yoffsetII})(\ESO@gridDelta,0){\@tempcnta}%
-      {\ESO@Vline{\LenToUnit{\paperheight}}}%
-    \fontsize{10}{12}\normalfont%
-    \ESO@div{\paperwidth}{\ESO@gridDelta}%
-    \multiput(0,\ESO@gridDeltaY)(\ESO@gridDelta,0){\@tempcnta}{%
-      \@tempcntb=\@tempcnta\advance\@tempcntb-\@multicnt%
-      \ifnum\@tempcntb>1\relax
-        \multiply\@tempcntb by \ESO@gridDelta\relax%
-        \@tempdima=\@tempcntb sp\@tempdima=\ESO@labelfactor\@tempdima%
-        \@tempcntb=\@tempdima%
-        \makebox(0,0)[c]{\ESO@colorbox{white}{\the\@tempcntb}}%
-      \fi}%
-    \ifx\ESO@gridunitname\@empty\def\@tempa{0}\else\def\@tempa{1}\fi%
-    \ESO@div{\paperheight}{\ESO@gridDelta}%
-    \multiput(\ESO@gridDelta,0)(0,\ESO@gridDeltaY){\@tempcnta}{%
-      \@tempcntb=\@tempcnta\advance\@tempcntb-\@multicnt%
-      \ifnum\@tempcntb>\@tempa\relax
-        \multiply\@tempcntb by \ESO@gridDelta\relax%
-        \@tempdima=\@tempcntb sp\@tempdima=\ESO@labelfactor\@tempdima%
-        \@tempcntb=\@tempdima%
-        \makebox(0,0)[c]{\ESO@colorbox{white}{\the\@tempcntb}}%
-      \fi
-    }%
-    \ifx\ESO@gridunitname\@empty\else%
-      \thicklines\fboxrule=\@wholewidth%
-      \put(\ESO@gridDelta,\ESO@gridDeltaY){\makebox(0,0)[c]{%
-        \ESO@fcolorbox{\ESO@gridcolor}{white}{%
-          \textbf{\ESO@gridunitname}}}}%
-    \fi
-    \normalcolor%
-  \endgroup
-}
-\ifESO@grid\g@addto@macro\ESO@HookIII{\ESO@gridpicture}\fi
 % ---------------------------------------------------------------
-
-
 
 
 \typeout{CVPR 8.5 x 11-Inch Proceedings Style `cvpr.sty'.}
