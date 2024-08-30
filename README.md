@@ -4,6 +4,7 @@
 
 History (in reverse chronological order)
 
+- added automated LaTeX build testing by [Ahan Shabanov](https://ahanio.github.io)
 - References in `cvprblue` for CVPR 2024 by [Klaus Greff](https://github.com/Qwlouse) 
 - added natbib for CVPR 2024 by [Christian Richardt](https://richardt.name/)
 - replaced buggy (review-mode) line numbering for 3DV 2024 by [Adin Ramirez Rivera](https://openreview.net/profile?id=~Ad%C3%ADn_Ram%C3%ADrez_Rivera1)
