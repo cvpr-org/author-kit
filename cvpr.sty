@@ -235,8 +235,8 @@
 \setlength{\headheight}{0in}
 \setlength{\headsep}{0in}
 \setlength{\parindent}{1pc}
-\setlength{\oddsidemargin}{-.304in}
-\setlength{\evensidemargin}{-.304in}
+\setlength{\oddsidemargin}{-0.1875in}
+\setlength{\evensidemargin}{-0.1875in}
 
 
 % Suppress page numbers when the appropriate option is given
@@ -419,10 +419,10 @@
   }{
     \color[rgb]{.5,.5,1}
 
-    \def\pid{\parbox{1in}{\begin{center}\bf\sf{\small \confName}\\\#\paperID\end{center}}}
+    \def\pid{\parbox{1in}{\begin{center}\bf\sf{\small \confName}\\\small \#\paperID\end{center}}}
     \AtTextUpperLeft{%paperID in corners
       \put(\LenToUnit{-65pt},\LenToUnit{45pt}){\pid}
-      \put(\LenToUnit{\textwidth\kern-8pt},\LenToUnit{45pt}){\pid}
+      \put(\LenToUnit{\textwidth-12pt},\LenToUnit{45pt}){\pid}
     }
     \AtTextUpperLeft{%confidential
       \put(0,\LenToUnit{1cm}){\parbox{\textwidth}{\centering\cvprtenhv
