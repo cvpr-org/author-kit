@@ -336,87 +336,83 @@
 \def\cvprsubsect#1{\cvprsubsection{\hskip -1em.~#1}}
 \def\subsection{\@ifstar\cvprssubsect\cvprsubsect}
 
-%% --------- Page background marks: Ruler and confidentiality
-
-% ----- define vruler
-\makeatletter
-\newbox\cvprrulerbox
-\newcount\cvprrulercount
-\newdimen\cvprruleroffset
-\newdimen\cv@lineheight
-\newdimen\cv@boxheight
-\newbox\cv@tmpbox
-\newcount\cv@refno
-\newcount\cv@tot
-% NUMBER with left flushed zeros  \fillzeros[<WIDTH>]<NUMBER>
-\newcount\cv@tmpc@ \newcount\cv@tmpc
-\def\fillzeros[#1]#2{\cv@tmpc@=#2\relax\ifnum\cv@tmpc@<0\cv@tmpc@=-\cv@tmpc@\fi
-\cv@tmpc=1 %
-\loop\ifnum\cv@tmpc@<10 \else \divide\cv@tmpc@ by 10 \advance\cv@tmpc by 1 \fi
-   \ifnum\cv@tmpc@=10\relax\cv@tmpc@=11\relax\fi \ifnum\cv@tmpc@>10 \repeat
-\ifnum#2<0\advance\cv@tmpc1\relax-\fi
-\loop\ifnum\cv@tmpc<#1\relax0\advance\cv@tmpc1\relax\fi \ifnum\cv@tmpc<#1 \repeat
-\cv@tmpc@=#2\relax\ifnum\cv@tmpc@<0\cv@tmpc@=-\cv@tmpc@\fi \relax\the\cv@tmpc@}%
-\makeatother
-% ----- end of vruler
-
-%% Define linenumber setup
-\RequirePackage[switch,mathlines]{lineno}
-
-% Line numbers in CVPR blue using font from \cvprtenhv
-\renewcommand\linenumberfont{\cvprtenhv\color[rgb]{.5,.5,1}}
-
-\renewcommand\thelinenumber{\fillzeros[3]{\arabic{linenumber}}}
-
-\setlength{\linenumbersep}{.75cm}
-
-% Bug: An equation with $$ ... $$ isn't numbered, nor is the previous line.
-
-% Patch amsmath commands so that the previous line and the equation itself
-% are numbered. Bug: multiline has an extra line number.
-% https://tex.stackexchange.com/questions/461186/how-to-use-lineno-with-amsmath-align
-\RequirePackage{etoolbox} %% <- for \pretocmd, \apptocmd and \patchcmd
-
-\newcommand*\linenomathpatch[1]{%
-  \expandafter\pretocmd\csname #1\endcsname {\linenomath}{}{}%
-  \expandafter\pretocmd\csname #1*\endcsname {\linenomath}{}{}%
-  \expandafter\apptocmd\csname end#1\endcsname {\endlinenomath}{}{}%
-  \expandafter\apptocmd\csname end#1*\endcsname {\endlinenomath}{}{}%
-}
-\newcommand*\linenomathpatchAMS[1]{%
-  \expandafter\pretocmd\csname #1\endcsname {\linenomathAMS}{}{}%
-  \expandafter\pretocmd\csname #1*\endcsname {\linenomathAMS}{}{}%
-  \expandafter\apptocmd\csname end#1\endcsname {\endlinenomath}{}{}%
-  \expandafter\apptocmd\csname end#1*\endcsname {\endlinenomath}{}{}%
-}
-
-%% Definition of \linenomathAMS depends on whether the mathlines option is provided
-\expandafter\ifx\linenomath\linenomathWithnumbers
-\let\linenomathAMS\linenomathWithnumbers
-%% The following line gets rid of an extra line numbers at the bottom:
-\patchcmd\linenomathAMS{\advance\postdisplaypenalty\linenopenalty}{}{}{}
-\else
-\let\linenomathAMS\linenomathNonumbers
-\fi
-
+%% --------- Page background marks: Ruler and confidentiality (only for review and rebuttal)
 \iftoggle{cvprfinal}{}{
-% Add the numbers
-\linenumbers
-\AtBeginDocument{%
-  \linenomathpatch{equation}%
-  \linenomathpatchAMS{gather}%
-  \linenomathpatchAMS{multline}%
-  \linenomathpatchAMS{align}%
-  \linenomathpatchAMS{alignat}%
-  \linenomathpatchAMS{flalign}%
-}
-}
+  % ----- define vruler
+  \makeatletter
+  \newbox\cvprrulerbox
+  \newcount\cvprrulercount
+  \newdimen\cvprruleroffset
+  \newdimen\cv@lineheight
+  \newdimen\cv@boxheight
+  \newbox\cv@tmpbox
+  \newcount\cv@refno
+  \newcount\cv@tot
+  % NUMBER with left flushed zeros  \fillzeros[<WIDTH>]<NUMBER>
+  \newcount\cv@tmpc@ \newcount\cv@tmpc
+  \def\fillzeros[#1]#2{\cv@tmpc@=#2\relax\ifnum\cv@tmpc@<0\cv@tmpc@=-\cv@tmpc@\fi
+  \cv@tmpc=1 %
+  \loop\ifnum\cv@tmpc@<10 \else \divide\cv@tmpc@ by 10 \advance\cv@tmpc by 1 \fi
+    \ifnum\cv@tmpc@=10\relax\cv@tmpc@=11\relax\fi \ifnum\cv@tmpc@>10 \repeat
+  \ifnum#2<0\advance\cv@tmpc1\relax-\fi
+  \loop\ifnum\cv@tmpc<#1\relax0\advance\cv@tmpc1\relax\fi \ifnum\cv@tmpc<#1 \repeat
+  \cv@tmpc@=#2\relax\ifnum\cv@tmpc@<0\cv@tmpc@=-\cv@tmpc@\fi \relax\the\cv@tmpc@}%
+  \makeatother
+  % ----- end of vruler
 
-% \makevruler[<SCALE>][<INITIAL_COUNT>][<STEP>][<DIGITS>][<HEIGHT>]
-\def\cvprruler#1{\makevruler[12pt][#1][1][3][0.993\textheight]\usebox{\cvprrulerbox}}
-\AddToShipoutPicture{%
-  \iftoggle{cvprfinal}{
-  }{
+  %% Define linenumber setup
+  \RequirePackage[switch,mathlines]{lineno}
+
+  % Line numbers in CVPR blue using font from \cvprtenhv
+  \renewcommand\linenumberfont{\cvprtenhv\color[rgb]{.5,.5,1}}
+
+  \renewcommand\thelinenumber{\fillzeros[3]{\arabic{linenumber}}}
+
+  \setlength{\linenumbersep}{.75cm}
+
+  % Bug: An equation with $$ ... $$ isn't numbered, nor is the previous line.
+
+  % Patch amsmath commands so that the previous line and the equation itself
+  % are numbered. Bug: multiline has an extra line number.
+  % https://tex.stackexchange.com/questions/461186/how-to-use-lineno-with-amsmath-align
+  \RequirePackage{etoolbox} %% <- for \pretocmd, \apptocmd and \patchcmd
+
+  \newcommand*\linenomathpatch[1]{%
+    \expandafter\pretocmd\csname #1\endcsname {\linenomath}{}{}%
+    \expandafter\pretocmd\csname #1*\endcsname {\linenomath}{}{}%
+    \expandafter\apptocmd\csname end#1\endcsname {\endlinenomath}{}{}%
+    \expandafter\apptocmd\csname end#1*\endcsname {\endlinenomath}{}{}%
+  }
+  \newcommand*\linenomathpatchAMS[1]{%
+    \expandafter\pretocmd\csname #1\endcsname {\linenomathAMS}{}{}%
+    \expandafter\pretocmd\csname #1*\endcsname {\linenomathAMS}{}{}%
+    \expandafter\apptocmd\csname end#1\endcsname {\endlinenomath}{}{}%
+    \expandafter\apptocmd\csname end#1*\endcsname {\endlinenomath}{}{}%
+  }
+
+  %% Definition of \linenomathAMS depends on whether the mathlines option is provided
+  \expandafter\ifx\linenomath\linenomathWithnumbers
+  \let\linenomathAMS\linenomathWithnumbers
+  %% The following line gets rid of an extra line numbers at the bottom:
+  \patchcmd\linenomathAMS{\advance\postdisplaypenalty\linenopenalty}{}{}{}
+  \else
+  \let\linenomathAMS\linenomathNonumbers
+  \fi
+
+  % Add the numbers
+  \linenumbers
+  \AtBeginDocument{%
+    \linenomathpatch{equation}%
+    \linenomathpatchAMS{gather}%
+    \linenomathpatchAMS{multline}%
+    \linenomathpatchAMS{align}%
+    \linenomathpatchAMS{alignat}%
+    \linenomathpatchAMS{flalign}%
+  }
+
+  % \makevruler[<SCALE>][<INITIAL_COUNT>][<STEP>][<DIGITS>][<HEIGHT>]
+  \def\cvprruler#1{\makevruler[12pt][#1][1][3][0.993\textheight]\usebox{\cvprrulerbox}}
+  \AddToShipoutPicture{%
     \color[rgb]{.5,.5,1}
 
     \def\pid{\parbox{1in}{\begin{center}\bf\sf{\small \confName}\\\small \#\paperID\end{center}}}
@@ -429,7 +425,7 @@
       \confName~\confYear~Submission \#\paperID. CONFIDENTIAL REVIEW COPY.  DO NOT DISTRIBUTE.}}
     }
   }
-}
+} % end of not cvprfinal
 
 %%% Make figure placement a little more predictable.
 % We trust the user to move figures if this results
