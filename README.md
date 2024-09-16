@@ -13,7 +13,7 @@
 - added natbib for CVPR 2024 by [Christian Richardt](https://richardt.name/)
 - replaced buggy (review-mode) line numbering for 3DV 2024 by [Adín Ramírez Rivera
 ](https://openreview.net/profile?id=~Ad%C3%ADn_Ram%C3%ADrez_Rivera1)
-- logic for inline supplementary for 3DV 2024 by [Andrea Tagliasacchi](https://taiya.github.io) 
+- centralized resources to `https://github.com/cvpr-org/author-kit` [Andrea Tagliasacchi](https://taiya.github.io) 
 - modernized for CVPR 2022 by [Stefan Roth](mailto:stefan.roth@NOSPAMtu-darmstadt.de)
 - created cvpr.sty file to unify review/rebuttal/final versions by [Ming-Ming Cheng](https://github.com/MCG-NKU/CVPR_Template)
 - developed CVPR 2005 template  by [Paolo Ienne](mailto:Paolo.Ienne@di.epfl.ch) and [Andrew Fitzgibbon](mailto:awf@acm.org)

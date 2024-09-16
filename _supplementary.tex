@@ -1,0 +1,18 @@
+\clearpage
+\maketitleagain{Supplementary Material}
+
+The supplementary can be compiled together with the main paper, therefore:
+% 
+\begin{itemize}
+\item The supplementary can back-reference sections of the main paper, for example, we can refer to \cref{sec:intro};
+\item The main paper can forward reference sub-sections within the supplementary explicitly (e.g. referring to a particular experiment); 
+\item When submitted to arXiv, the supplementary will already included at the end of the paper.
+\item To submit the supplementary, use the \verb|\includeonly{| command to avoid typesetting the paper itself.
+\item You can also add citations that you may have missed~\cite{Alpher2005}.
+\end{itemize}
+
+{
+    \small
+    \bibliographystyle{ieeenat_fullname}
+    \bibliography{main.bib}
+}

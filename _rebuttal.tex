@@ -1,54 +1,10 @@
-\documentclass[10pt,twocolumn,letterpaper]{article}
-\usepackage[rebuttal]{cvpr}
-
-% Include other packages here, before hyperref.
-\usepackage{graphicx}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{booktabs}
-
-% Import additional packages in the preamble file, before hyperref
-\input{preamble}
-
-% If you comment hyperref and then uncomment it, you should delete
-% egpaper.aux before re-running latex.  (Or just hit 'q' on the first latex
-% run, let it finish, and you should be clear).
-\definecolor{cvprblue}{rgb}{0.21,0.49,0.74}
-\usepackage[pagebackref,breaklinks,colorlinks,allcolors=cvprblue]{hyperref}
-
-% If you wish to avoid re-using figure, table, and equation numbers from
-% the main paper, please uncomment the following and change the numbers
-% appropriately.
-%\setcounter{figure}{2}
-%\setcounter{table}{1}
-%\setcounter{equation}{2}
-
-% If you wish to avoid re-using reference numbers from the main paper,
-% please uncomment the following and change the counter value to the
-% number of references you have in the main paper (here, 100).
-%\makeatletter
-%\apptocmd{\thebibliography}{\global\c@NAT@ctr 100\relax}{}{}
-%\makeatother
-
-%%%%%%%%% PAPER ID  - PLEASE UPDATE
-\def\paperID{*****} % *** Enter the Paper ID here
-\def\confName{CVPR}
-\def\confYear{2023}
-
-\begin{document}
-
-%%%%%%%%% TITLE - PLEASE UPDATE
-\title{\LaTeX\ Guidelines for Author Response}  % **** Enter the paper title here
-
-\maketitle
-\thispagestyle{empty}
-\appendix
-
-%%%%%%%%% BODY TEXT - ENTER YOUR RESPONSE BELOW
-\section{Introduction}
+\clearpage
+\maketitleagain{Guidelines for Author Response}
+\setcounter{page}{1}
+\setcounter{section}{1}
 
 After receiving paper reviews, authors may optionally submit a rebuttal to address the reviewers' comments, which will be limited to a {\bf one page} PDF file.
-Please follow the steps and style guidelines outlined below for submitting your author response.
+Please follow the steps and style guidelines outlined below.
 
 The author rebuttal is optional and, following similar guidelines to previous conferences, is meant to provide you with an opportunity to rebut factual errors or to supply additional information requested by the reviewers.
 It is NOT intended to add new contributions (theorems, algorithms, experiments) that were absent in the original submission and NOT specifically requested by the reviewers.
@@ -63,17 +19,15 @@ The rebuttal must comply with this template (the use of sections is not required
 
 %-------------------------------------------------------------------------
 
-\subsection{Response length}
+\paragraph{Response length}
 Author responses must be no longer than 1 page in length including any references and figures.
 Overlength responses will simply not be reviewed.
 This includes responses where the margins and formatting are deemed to have been significantly altered from those laid down by this style guide.
 Note that this \LaTeX\ guide already sets figure captions and references in a smaller font.
 
 %------------------------------------------------------------------------
-\section{Formatting your Response}
-
+\section{Formatting your response}
 {\bf Make sure to update the paper title and paper ID in the appropriate place in the tex file.}
-
 All text must be in a two-column format.
 The total allowable size of the text area is $6\frac78$ inches (17.46 cm) wide by $8\frac78$ inches (22.54 cm) high.
 Columns are to be $3\frac14$ inches (8.25 cm) wide, with a $\frac{5}{16}$ inch (0.8 cm) space between them.
@@ -88,11 +42,10 @@ Wherever Times is specified, Times Roman may also be used.
 Main text should be in 10-point Times, single-spaced.
 Section headings should be in 10 or 12 point Times.
 All paragraphs should be indented 1 pica (approx.~$\frac{1}{6}$ inch or 0.422 cm).
-Figure and table captions should be 9-point Roman type as in \cref{fig:onecol}.
+Figure and table captions should be 9-point Roman type as in \cref{fig:rebuttal}.
 
 
-List and number all bibliographical references in 9-point Times, single-spaced,
-at the end of your response.
+List and number all bibliographical references in 9-point Times, single-spaced, at the end of your response.
 When referenced in the text, enclose the citation number in square brackets, for example~\cite{Alpher05}.
 Where appropriate, include the name(s) of editors of referenced books.
 
@@ -103,10 +56,10 @@ Where appropriate, include the name(s) of editors of referenced books.
    \caption{Example of caption.  It is set in Roman so that mathematics
    (always set in Roman: $B \sin A = A \sin B$) may be included without an
    ugly clash.}
-   \label{fig:onecol}
+   \label{fig:rebuttal}
 \end{figure}
 
-To avoid ambiguities, it is best if the numbering for equations, figures, tables, and references in the author response does not overlap with that in the main paper (the reviewer may wonder if you talk about \cref{fig:onecol} in the author response or in the paper).
+To avoid ambiguities, it is best if the numbering for equations, figures, tables, and references in the author response does not overlap with that in the main paper (the reviewer may wonder if you talk about \cref{fig:rebuttal} in the author response or in the paper).
 See \LaTeX\ template for a workaround.
 
 %-------------------------------------------------------------------------
@@ -116,7 +69,7 @@ All graphics should be centered.
 Please ensure that any point you wish to make is resolvable in a printed copy of the response.
 Resize fonts in figures to match the font in the body text, and choose line widths which render effectively in print.
 Readers (and reviewers), even of an electronic copy, may choose to print your response in order to read it.
-You cannot insist that they do otherwise, and therefore must not assume that they can zoom in to see tiny details on a graphic.
+You cannot insist that they do otherwise, and therefore must not assume that they can zoom in to see tiny details.
 
 When placing figures in \LaTeX, it is almost always best to use \verb+\includegraphics+, and to specify the  figure width as a multiple of the line width as in the example below
 {\small\begin{verbatim}
@@ -131,7 +84,5 @@ When placing figures in \LaTeX, it is almost always best to use \verb+\includegr
 {
     \small
     \bibliographystyle{ieeenat_fullname}
-    \bibliography{main}
+    \bibliography{main.bib}
 }
-
-\end{document}
