@@ -337,7 +337,15 @@
 \def\subsection{\@ifstar\cvprssubsect\cvprsubsect}
 
 %% --------- Page background marks: Ruler and confidentiality (only for review and rebuttal)
-\iftoggle{cvprfinal}{}{
+\iftoggle{cvprfinal}{
+  % In review and rebuttal mode, we use the "lineno" package for numbering lines.
+  % When switching to a different mode, the "\@LN" macro may remain in cached .aux files,
+  % leading to build errors (https://github.com/cvpr-org/author-kit/issues/49).
+  % Defining the macro as empty fixes that (https://tex.stackexchange.com/a/125779).
+  \makeatletter
+  \providecommand{\@LN}[2]{}
+  \makeatother
+}{
   % ----- define vruler
   \makeatletter
   \newbox\cvprrulerbox
