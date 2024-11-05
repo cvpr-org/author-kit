@@ -4,6 +4,7 @@
 
 ### History (in reverse chronological order)
 
+- added styles for `subsubsection` and fixed the wrong PDF bookmarks by [Di Fang](https://github.com/fang-d)
 - modernized for CVPR 2025 by [Christian Richardt](https://richardt.name/)
 - fixed page centering for CVPR 2025 by [Stefan Roth](mailto:stefan.roth@NOSPAMtu-darmstadt.de)
 - inline enumerations and `cvprblue` links for CVPR 2025 by [Ioannis Gkioulekas

@@ -217,11 +217,13 @@
 % change the name here:
 \font\cvprtenhv  = phvb at 8pt % *** IF THIS FAILS, SEE cvpr.sty ***
 \font\elvbf  = ptmb scaled 1100
+\font\tenbf  = ptmb scaled 1000
 
 % If the above lines give an error message, try to comment them and
 % uncomment these:
 %\font\cvprtenhv  = phvb7t at 8pt
 %\font\elvbf  = ptmb7t scaled 1100
+%\font\tenbf  = ptmb7t scaled 1000
 
 % set dimensions of columns, gap between columns, and paragraph indent
 \setlength{\textheight}{8.875in}
@@ -322,17 +324,31 @@
 \def\cvprsection{\@startsection {section}{1}{\z@}
    {-10pt plus -2pt minus -2pt}{7pt} {\large\bf}}
 \def\cvprssect#1{\cvprsection*{#1}}
-\def\cvprsect#1{\cvprsection{\hskip -1em.~#1}}
+\def\cvprsect#1{\cvprsection{\texorpdfstring{\hskip -1em.~}{}#1}}
 \def\section{\@ifstar\cvprssect\cvprsect}
 
 \def\cvprsubsection{\@startsection {subsection}{2}{\z@}
-   {-8pt plus -2pt minus -2pt}{6pt} {\elvbf}}
+   {-8pt plus -2pt minus -2pt}{5pt} {\elvbf}}
 \def\cvprssubsect#1{\cvprsubsection*{#1}}
-\def\cvprsubsect#1{\cvprsubsection{\hskip -1em.~#1}}
+\def\cvprsubsect#1{\cvprsubsection{\texorpdfstring{\hskip -1em.~}{}#1}}
 \def\subsection{\@ifstar\cvprssubsect\cvprsubsect}
 
+\def\cvprsubsubsection{\@startsection {subsubsection}{3}{\z@}
+   {-6pt plus -2pt minus -2pt}{3pt} {\tenbf}}
+\def\cvprssubsubsect#1{\cvprsubsubsection*{#1}}
+\def\cvprsubsubsect#1{\cvprsubsubsection{\texorpdfstring{\hskip -1em.~}{}#1}}
+\def\subsubsection{\@ifstar\cvprssubsubsect\cvprsubsubsect}
+
 %% --------- Page background marks: Ruler and confidentiality (only for review and rebuttal)
-\iftoggle{cvprfinal}{}{
+\iftoggle{cvprfinal}{
+  % In review and rebuttal mode, we use the "lineno" package for numbering lines.
+  % When switching to a different mode, the "\@LN" macro may remain in cached .aux files,
+  % leading to build errors (https://github.com/cvpr-org/author-kit/issues/49).
+  % Defining the macro as empty fixes that (https://tex.stackexchange.com/a/125779).
+  \makeatletter
+  \providecommand{\@LN}[2]{}
+  \makeatother
+}{
   % ----- define vruler
   \makeatletter
   \newbox\cvprrulerbox
