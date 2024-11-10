@@ -1,10 +1,30 @@
-%
-% --- inline annotations
-%
+%%
+%% load additional packages
+%%
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{blindtext}
+
+%%
+%% inline annotations
+%%
 \newcommand{\red}[1]{{\color{red}#1}}
 \newcommand{\todo}[1]{{\color{red}#1}}
 \newcommand{\TODO}[1]{\textbf{\color{red}[TODO: #1]}}
-% --- disable by uncommenting  
+% disable by uncommenting below  
 % \renewcommand{\TODO}[1]{}
 % \renewcommand{\todo}[1]{#1}
+
+%%
+%% tightens underlining from \ul{....}
+%%
+% \usepackage{soul}
+% \setuldepth{foobar}
+
+%%
+%% optimizes typesetting further (usually saves some space)
+%%
+% \usepackage{microtype}
 

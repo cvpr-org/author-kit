@@ -10,18 +10,12 @@
 % use as
 %   \documentclass[times,10pt,twocolumn]{article}
 %   \usepackage[options]{cvpr}
-%   \usepackage{times}
 %
 % "options" should be replaced by
 %  * "review" for submitting a paper for review,
 %  * "final" for the camera ready, and
-%  * "rebuttal" for the author rebuttal.
+%  * "pagenumbers" for arxiv
 %
-% specify references as
-%   {\small
-%   \bibliographystyle{ieee}
-%   \bibliography{...your files...}
-%   }
 % ---------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
@@ -34,15 +28,25 @@
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{booktabs}
+\RequirePackage[sectionbib]{chapterbib}
 \RequirePackage[numbers,sort&compress]{natbib}
 \setlength{\bibsep}{1pt plus 1pt minus 1pt}
+
+% ---------------------------------------------------------------
 
 \RequirePackage{silence}  % Suppress unwanted warnings
 \hbadness=10000 \vbadness=10000 \vfuzz=30pt \hfuzz=30pt
 \WarningFilter{latexfont}{Font shape declaration}
 \WarningFilter{latex}{Font shape}
-\WarningFilter[rebuttal]{latex}{No \author given}
+\WarningFilter{hyperref}{Token not allowed in a PDF string}
+\WarningFilter{chapterbib}{The sectionbib option changes}
+
+% ---------------------------------------------------------------
+
 \RequirePackage{etoolbox}
+
+% Define cvprblue color used for all links
+\definecolor{cvprblue}{rgb}{0.21,0.49,0.74}
 
 % Use modern caption package to allow for sub-figures etc.
 % Reproduces the original CVPR/ICCV style as closely as possible.
@@ -51,21 +55,14 @@
 
 
 \newtoggle{cvprfinal}        % Camera-ready version
-\newtoggle{cvprrebuttal}     % Rebuttal
 \newtoggle{cvprpagenumbers}  % Force page numbers (in camera ready)
 \toggletrue{cvprfinal}
-\togglefalse{cvprrebuttal}
 \togglefalse{cvprpagenumbers}
 \DeclareOption{review}{\togglefalse{cvprfinal}\toggletrue{cvprpagenumbers}}
-\DeclareOption{rebuttal}{\togglefalse{cvprfinal}\toggletrue{cvprrebuttal}}
 \DeclareOption{pagenumbers}{\toggletrue{cvprpagenumbers}}
 \DeclareOption*{\PackageWarning{cvpr}{Unkown option `\CurrentOption'}}
 \ProcessOptions\relax
 
-% Don't warn about missing author for rebuttal
-\iftoggle{cvprrebuttal}{%
-  \ActivateWarningFilters[rebuttal]
-}{}
 
 % Breaking lines for URLs in the bib
 \RequirePackage[hyphens]{url}
@@ -279,23 +276,22 @@
 \def\@maketitle{
    \newpage
    \null
-   \iftoggle{cvprrebuttal}{\vspace*{-.3in}}{\vskip .375in}
    \begin{center}
-      % smaller title font only for rebuttal
-      \iftoggle{cvprrebuttal}{{\large \bf \@title \par}}{{\Large \bf \@title \par}}
+      % print the title 
+      {\Large \bf \@title \par}
       % additional two empty lines at the end of the title
-      \iftoggle{cvprrebuttal}{\vspace*{-22pt}}{\vspace*{24pt}}{
+      \vspace*{24pt}
+      {
         \large
         \lineskip .5em
         \begin{tabular}[t]{c}
           \iftoggle{cvprfinal}{
             \@author
-          }{
-            \iftoggle{cvprrebuttal}{}{
-              Anonymous \confName~submission\\
-              \vspace*{1pt}\\
-              Paper ID \paperID
-            }
+          }
+          {
+            Anonymous Submission
+            \\[.5em]
+            Paper ID \paperID
           }
         \end{tabular}
         \par
@@ -473,26 +469,33 @@
 
 % ---------------------------------------------------------------
 
-%% redefine the \title command so that a variable name is saved in \thetitle, and provides the \maketitlesupplementary command
+%% redefine the \title command so that a variable name is saved in \thetitle, and provides the \maketitleagain command
 \let\titleold\title
 \renewcommand{\title}[1]{\titleold{#1}\newcommand{\thetitle}{#1}}
-\def\maketitlesupplementary
+\newcommand\maketitleagain[1]
    {
    \newpage
        \twocolumn[
         \centering
         \Large
-        \textbf{\thetitle}\\
-        \vspace{0.5em}Supplementary Material \\
-        \vspace{1.0em}
+        \textbf{\thetitle}
+        \\
+        \vspace{.5em}
+        #1
+        \vspace{1em}
        ] %< twocolumn
    }
 
 % ---------------------------------------------------------------
 
-%% Support for easy cross-referencing (e.g. \cref{sec:intro}
-% configured with \AtEndPreamble as it needs to be called after hyperref
+
 \AtEndPreamble{
+    \usepackage[pagebackref,breaklinks,colorlinks,allcolors=cvprblue]{hyperref}
+
+    %%
+    %% Support for easy cross-referencing (e.g. \cref{sec:intro})
+    %% WARNING: needs to be called after hyperref
+    %%
     \usepackage[capitalize]{cleveref}
     \crefname{section}{Sec.}{Secs.}
     \Crefname{section}{Section}{Sections}
