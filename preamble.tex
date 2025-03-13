@@ -1,3 +1,12 @@
+%% This file contains a number of tweaks that are typically applied to the main document.
+%% They are not enabled by default, but can be enabled by uncommenting the relevant lines.
+
+%%
+%% work harder in optimizing text layout. Typically shrinks text by 1/6 of page, enable
+%% it at the very end of the writing process, when you are just above the page limit
+%%
+% \usepackage{microtype}
+
 %%
 %% fine-tune paragraph spacing
 %%
@@ -29,26 +38,14 @@
 % \setuldepth{foobar}
 
 %%
-%% Commonly used colors
+%% Inline annotations; for predefined colors, refer to "dvipsnames" in the xcolor package:
+%% https://tinyurl.com/overleaf-colors
 %%
-% \definecolor{turquoise}{cmyk}{0.65,0,0.1,0.3}
-% \definecolor{purple}{rgb}{0.65,0,0.65}
-% \definecolor{dark_green}{rgb}{0, 0.5, 0}
-% \definecolor{orange}{rgb}{0.8, 0.6, 0.2}
-% \definecolor{darkred}{rgb}{0.6, 0.1, 0.05}
-% \definecolor{blueish}{rgb}{0.0, 0.3, .6}
-% \definecolor{light_gray}{rgb}{0.7, 0.7, .7}
-% \definecolor{pink}{rgb}{0.9, 0, 0.6}
-% \definecolor{greyblue}{rgb}{0.25, 0.25, 1}
-% \definecolor{teal}{rgb}{0.0, 0.4, 0.4}
-% \definecolor{chocolate}{rgb}{1.0, 0.4, 0.0}
-
+% \newcommand{\red}[1]{{\color{red}#1}}
+% \newcommand{\todo}[1]{{\color{red}#1}}
+% \newcommand{\TODO}[1]{\textbf{\color{red}[TODO: #1]}}
 %%
-%% Inline annotations
+%% disable for camera ready / submission by uncommenting these lines  
 %%
-\newcommand{\red}[1]{{\color{red}#1}}
-\newcommand{\todo}[1]{{\color{red}#1}}
-\newcommand{\TODO}[1]{\textbf{\color{red}[TODO: #1]}}
-% disable by uncommenting  
 % \renewcommand{\TODO}[1]{}
 % \renewcommand{\todo}[1]{#1}
