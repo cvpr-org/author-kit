@@ -4,6 +4,7 @@
 
 ### History (in reverse chronological order)
 
+- updated for CVPR 2026 [Vladimir Pavlovic](mailto:vladimir@rutgers.edu)
 - added styles for `subsubsection` and fixed the wrong PDF bookmarks by [Di Fang](https://github.com/fang-d)
 - modernized for CVPR 2025 by [Christian Richardt](https://richardt.name/)
 - fixed page centering for CVPR 2025 by [Stefan Roth](mailto:stefan.roth@NOSPAMtu-darmstadt.de)

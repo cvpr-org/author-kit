@@ -10,3 +10,4 @@
 *.fdb_latexmk
 *.pdf
 .gitignore
+.DS_Store

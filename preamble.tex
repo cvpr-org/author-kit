@@ -2,6 +2,19 @@
 %% They are not enabled by default, but can be enabled by uncommenting the relevant lines.
 
 %%
+%% Inline annotations; for predefined colors, refer to "dvipsnames" in the xcolor package:
+%% https://tinyurl.com/overleaf-colors
+%%
+\newcommand{\red}[1]{{\color{red}#1}}
+\newcommand{\todo}[1]{{\color{red}#1}}
+\newcommand{\TODO}[1]{\textbf{\color{red}[TODO: #1]}}
+%%
+%% disable for camera ready / submission by uncommenting these lines  
+%%
+% \renewcommand{\TODO}[1]{}
+% \renewcommand{\todo}[1]{#1}
+
+%%
 %% work harder in optimizing text layout. Typically shrinks text by 1/6 of page, enable
 %% it at the very end of the writing process, when you are just above the page limit
 %%
@@ -36,16 +49,3 @@
 %%
 % \usepackage{soul}
 % \setuldepth{foobar}
-
-%%
-%% Inline annotations; for predefined colors, refer to "dvipsnames" in the xcolor package:
-%% https://tinyurl.com/overleaf-colors
-%%
-% \newcommand{\red}[1]{{\color{red}#1}}
-% \newcommand{\todo}[1]{{\color{red}#1}}
-% \newcommand{\TODO}[1]{\textbf{\color{red}[TODO: #1]}}
-%%
-%% disable for camera ready / submission by uncommenting these lines  
-%%
-% \renewcommand{\TODO}[1]{}
-% \renewcommand{\todo}[1]{#1}
