@@ -1,6 +1,24 @@
 %% This file contains a number of tweaks that are typically applied to the main document.
 %% They are not enabled by default, but can be enabled by uncommenting the relevant lines.
 
+
+%%
+%% Official support for 2-column teaser figure
+%%
+\usepackage{cuted} %< for strip environment
+
+%%
+%% For auto-referencing of figures (see fig/teaser.tex and \label{} therein) 
+%%
+\usepackage{currfile} %< for \currfilebase macro
+
+%%
+%% caption and (global) spacing overrides
+%%
+\usepackage{caption} %< for "\captionof" commands (teaser)
+% \setlength{\abovecaptionskip}{.5em} % space above caption
+% \setlength{\belowcaptionskip}{1em} % space below caption
+
 %%
 %% Inline annotations; for predefined colors, refer to "dvipsnames" in the xcolor package:
 %% https://tinyurl.com/overleaf-colors
@@ -48,3 +66,7 @@
 %%
 % \usepackage{soul}
 % \setuldepth{foobar}
+
+%%
+%% Reconfigure paragraph (tweaks spacing)
+%%
