@@ -13,27 +13,39 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Compile LaTeX document
+    - name: Compile LaTeX documents
       uses: xu-cheng/latex-action@v3
       with:
-        root_file: main.tex
+        root_file: |
+          main.tex
+          rebuttal.tex
 
     - name: Check for LaTeX errors and warnings
       run: |
-        if grep -q "^!" main.log; then
-          echo "LaTeX errors found:"
-          grep "^!" main.log
-          exit 1
-        elif grep -q "Warning:" main.log; then
-          echo "LaTeX warnings found:"
-          grep "Warning:" main.log
-          echo "Build completed with warnings."
-        else
-          echo "LaTeX build completed successfully without errors or warnings."
-        fi
+        status=0
+        for doc in main rebuttal; do
+          if grep -q "^!" "$doc.log"; then
+            echo "LaTeX errors found in $doc.tex:"
+            grep "^!" "$doc.log"
+            status=1
+          elif grep -q "Warning:" "$doc.log"; then
+            echo "LaTeX warnings found in $doc.tex:"
+            grep "Warning:" "$doc.log"
+            echo "Build of $doc.tex completed with warnings."
+          else
+            echo "LaTeX build of $doc.tex completed successfully without errors or warnings."
+          fi
+        done
+        exit $status
 
-    - name: Upload PDF
+    - name: Upload main PDF
       uses: actions/upload-artifact@v4
       with:
         name: main.pdf
         path: main.pdf
+
+    - name: Upload rebuttal PDF
+      uses: actions/upload-artifact@v4
+      with:
+        name: rebuttal.pdf
+        path: rebuttal.pdf
