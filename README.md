@@ -5,6 +5,8 @@ You may find the 2024 version [here](https://github.com/cvpr-org/author-kit/rele
 
 ### History (in reverse chronological order)
 
+- updated for CVPR 2027 [Vicky Kalogeiton](mailto:vicky.kalogeiton@polytechnique.edu)
+- removed the Paper ID to reduce the risk of leaking IDs
 - updated for CVPR 2026 [Vladimir Pavlovic](mailto:vladimir@rutgers.edu)
 - added styles for `subsubsection` and fixed the wrong PDF bookmarks by [Di Fang](https://github.com/fang-d)
 - modernized for CVPR 2025 by [Christian Richardt](https://richardt.name/)
