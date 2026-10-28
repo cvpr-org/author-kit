@@ -25,7 +25,7 @@
 % ---------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
-\ProvidesPackage{cvpr}[2026 LaTeX class for IEEE CVPR]
+\ProvidesPackage{cvpr}[2027 LaTeX class for IEEE CVPR]
 
 \RequirePackage{times}    % Integrate Times for here
 \RequirePackage{xspace}
@@ -292,9 +292,7 @@
             \@author
           }{
             \iftoggle{cvprrebuttal}{}{
-              Anonymous \confName~submission\\
-              \vspace*{1pt}\\
-              Paper ID \paperID
+              Anonymous \confName~submission
             }
           }
         \end{tabular}
@@ -430,14 +428,14 @@
   \AddToShipoutPicture{%
     \color[rgb]{.5,.5,1}
 
-    \def\pid{\parbox{1in}{\begin{center}\bf\sf{\small \confName}\\\small \#\paperID\end{center}}}
-    \AtTextUpperLeft{%paperID in corners
+    \def\pid{\parbox{1in}{\begin{center}\bf\sf{\small \confName}\end{center}}}
+    \AtTextUpperLeft{%conference name in corners
       \put(\LenToUnit{-65pt},\LenToUnit{45pt}){\pid}
       \put(\LenToUnit{\textwidth-12pt},\LenToUnit{45pt}){\pid}
     }
     \AtTextUpperLeft{%confidential
       \put(0,\LenToUnit{1cm}){\parbox{\textwidth}{\centering\cvprtenhv
-      \confName~\confYear~Submission \#\paperID. CONFIDENTIAL REVIEW COPY.  DO NOT DISTRIBUTE.}}
+      \confName~\confYear~Submission. CONFIDENTIAL REVIEW COPY.  DO NOT DISTRIBUTE.}}
     }
   }
 } % end of not cvprfinal
