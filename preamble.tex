@@ -68,5 +68,20 @@
 % \setuldepth{foobar}
 
 %%
-%% Reconfigure paragraph (tweaks spacing)
+%% Fix misplaced line numbers with lineno v5.7/v5.8 (Feb 2026, e.g. early TeX Live 2026 installs).
+%% These versions write the column tag outside the column box, so line numbers end up on the
+%% wrong side of the column. This backports the fix from lineno v5.9 and does nothing for other
+%% lineno versions or in camera-ready mode. Updating TeX Live (tlmgr update --all) also fixes it.
 %%
+\makeatletter
+\@ifpackageloaded{lineno}{\ifdefined\IfFormatAtLeastTF\IfFormatAtLeastTF{2025-06-01}{%
+  \@ifpackagelater{lineno}{2026/03/08}{}{\@ifpackagelater{lineno}{2026/02/16}{%
+    \RemoveFromHook{build/column/before}[lineno]%
+    \AddToHook{build/column/after}{%
+      \setbox\@outputbox\vbox to\ht\@outputbox{%
+        \boxmaxdepth\@maxdepth
+        \protected@write\@auxout{}{%
+          \string\def\string\@LN@column{\if@firstcolumn1\else2\fi}}%
+        \unvbox\@outputbox}}%
+  }{}}}{}\fi}{}
+\makeatother
