@@ -5,6 +5,7 @@ You may find the 2024 version [here](https://github.com/cvpr-org/author-kit/rele
 
 ### History (in reverse chronological order)
 
+- fixed misplaced line numbers with lineno v5.7/v5.8 (early TeX Live 2026) by [Yeshwanth Kumar](https://yeshwanth95.github.io/)
 - updated for CVPR 2027 [Vicky Kalogeiton](mailto:vicky.kalogeiton@polytechnique.edu)
 - removed the Paper ID to reduce the risk of leaking IDs
 - updated for CVPR 2026 [Vladimir Pavlovic](mailto:vladimir@rutgers.edu)
